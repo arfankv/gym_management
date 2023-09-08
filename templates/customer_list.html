@@ -1,0 +1,33 @@
+{% extends 'admin_panel.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if messages %}
+    <ul class="messages text-red">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+            <th>sl no</th>
+            <th>name</th>
+            <th>attendance</th>
+            </thead>
+            {% for i in customer %}
+            <tbody>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.name}}</td>
+            <td><a class="btn btn-primary" href="{% url 'mark' i.id %}">Mark</a></td>
+            <td>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+

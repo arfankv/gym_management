@@ -1,0 +1,53 @@
+{% extends 'admin_panel.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card vh-100 width=100%">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Contact No</th>
+                        <th >Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.age }}</td>
+                            <td>{{ i.address }}</td>
+                            <td>{{ i.contact_no }}</td>
+                            <td>
+                                {% if i.photo %}
+                                    <img src="{{ i.photo.url }}" alt="Profile Picture" class="img-fluid " width="100px" />
+                                {% else %}
+                                    No Image
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-success" href="{% url 'customer_update' i.id %}">Edit</a>
+                            </td>
+                            <td>
+                                <form action="{% url 'customer_delete' i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

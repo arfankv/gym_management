@@ -1,0 +1,30 @@
+{% extends 'trainer_panel.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+            <th>sl no</th>
+            <th>name</th>
+            <th>age</th>
+            <th>address</th>
+            <th>contact_no</th>
+
+            </thead>
+            {% for i in data %}
+            <tbody>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.address}}</td>
+            <td>{{i.contact_no}}</td>
+
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
